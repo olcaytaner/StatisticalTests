@@ -1,0 +1,38 @@
+function oa_paper
+  colormap([[0 0 0];[1 0 0]]);  
+  oa_histogram('10fold', 'breast', 1, ['lda'; 'qda'], 'error');
+  print -dpsc 'breast-lda-qda-1-hist.eps';
+  colormap([[0 0 0];[1 0 0];[0 1 0];[0 0 1];[1 0 1]]);
+  oa_histogram('10fold', 'spect', 4, ['c45'; 'knn'; 'lda'; 'qda'; 'svm'], 'error');
+  print -dpsc 'spect-4-error.eps';
+  oa_plotgauss2d('10fold', 'breast', 1, ['lda'; 'qda'], 'roc');
+  print -dpsc 'breast-1-lda-qda-cov.eps';
+  oa_plotgauss2d('10fold', 'spect', 4, ['c45'; 'knn'; 'lda'; 'qda'; 'svm'], 'roc');
+  print -dpsc 'spect-4-roc.eps';
+  oa_plotgauss2d('10fold', 'spect', 4, ['c45'; 'knn'; 'lda'; 'qda'; 'svm'], 'pr');
+  print -dpsc 'spect-4-pr.eps';
+  oa_plotgauss2d('10fold', 'bupa', 4, ['c45'; 'lda'], 'roc');
+  print -dpsc 'bupa-4-c45-lda-cov.eps';
+  oa_plotranks('10fold', 'breast', 1, ['lda'; 'qda'], 'roc');
+  print -dpsc 'breast-lda-qda-1-ranks.eps';
+  oa_plotranks('10fold', 'spect', 4, ['c45'; 'knn'; 'lda'; 'qda'; 'svm'], 'roc');
+  print -dpsc 'spect-4-roc-ranks.eps';
+  oa_plotranks('10fold', 'spect', 4, ['c45'; 'knn'; 'lda'; 'qda'; 'svm'], 'pr');
+  print -dpsc 'spect-4-pr-ranks.eps';
+  oa_plotranks('10fold', 'bupa', 4, ['c45'; 'lda'], 'roc');
+  print -dpsc 'bupa-4-c45-lda-ranks.eps';
+  oa_plotgauss2d('10fold', 'spect', 4, ['lda'; 'qda'; 'svm'], 'roc');
+  print -dpsc 'spect-4-3-roc.eps';
+  colormap([[0 0 0];[1 0 0];[0 1 0]]);
+  oa_histogram_parametric_reduced('10fold', 'spect', 4, ['lda'; 'qda'; 'svm'], 'roc');
+  print -dpsc 'eigenvectors-hist-roc.eps';
+  colormap([[0 0 0];[1 0 0];[0 1 0];[0 0 1]]);
+  oa_histogram_parametric_reduced('10fold', 'australian', 3, ['c45'; 'knn'; 'lda'; 'qda'], 'confusion');
+  print -dpsc 'australian-hist-new.eps';
+  colormap([[0 0 0];[1 0 0];[0 1 0]]);
+  oa_histogram_nonparametric_reduced('10fold', 'spect', 4, ['lda'; 'qda'; 'svm'], 'roc');
+  print -dpsc 'eigenvectors-hist-roc-nonparametric.eps';
+  colormap([[0 0 0];[1 0 0];[0 1 0];[0 0 1]]);
+  oa_histogram_nonparametric_reduced('10fold', 'australian', 3, ['c45'; 'knn'; 'lda'; 'qda'], 'confusion');
+  print -dpsc 'australian-hist-new-nonparametric.eps';  
+end
